@@ -33,6 +33,13 @@
             line-height: 1.8;
             overflow-x: hidden;
             -webkit-font-smoothing: antialiased;
+            scroll-padding-top: 70px;
+        }
+
+        @media (max-width: 900px) {
+            body {
+                scroll-padding-top: 40px;
+            }
         }
 
         /* Utilities */
@@ -677,10 +684,20 @@
         // Smooth scroll
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
-                });
+                const href = this.getAttribute('href');
+                if (href === '#' || !href.startsWith('#')) return;
+                
+                const target = document.querySelector(href);
+                if (target) {
+                    e.preventDefault();
+                    const headerHeight = document.getElementById('header').offsetHeight;
+                    const top = target.getBoundingClientRect().top + window.pageYOffset - headerHeight;
+                    
+                    window.scrollTo({
+                        top: top,
+                        behavior: 'smooth'
+                    });
+                }
             });
         });
         // Mobile Menu Toggle
