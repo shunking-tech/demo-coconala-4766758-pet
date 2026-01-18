@@ -1,0 +1,702 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LUXE DOG | 愛犬に、一生ものの心地よさを。</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --color-bg: #F9F9F7;
+            --color-white: #FFFFFF;
+            --color-charcoal: #333333;
+            --color-greige: #A8A29E;
+            --color-light-greige: #E5E4E2;
+            --font-serif: 'Playfair Display', serif;
+            --font-sans: 'Montserrat', sans-serif;
+            --transition-slow: 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+            --transition-med: 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--color-bg);
+            color: var(--color-charcoal);
+            font-family: var(--font-sans);
+            line-height: 1.8;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Utilities */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 80px;
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: var(--transition-slow);
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Header */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 30px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            transition: var(--transition-med);
+        }
+
+        header.scrolled {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .logo {
+            font-family: var(--font-serif);
+            font-size: 24px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            text-decoration: none;
+            color: var(--color-charcoal);
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 40px;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--color-charcoal);
+            font-size: 13px;
+            font-weight: 400;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            transition: opacity 0.3s;
+        }
+
+        nav a:hover {
+            opacity: 0.5;
+        }
+
+        .header-icons {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .header-icons a,
+        .header-icons a img {
+            display: block;
+        }
+
+        /* Hamburger Button */
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 6px;
+            cursor: pointer;
+            z-index: 1100;
+            padding: 5px;
+        }
+
+        .menu-toggle span {
+            display: block;
+            width: 24px;
+            height: 1px;
+            background-color: var(--color-charcoal);
+            transition: var(--transition-med);
+        }
+
+        .nav-open .menu-toggle span:nth-child(1) {
+            transform: translateY(7px) rotate(45deg);
+        }
+
+        .nav-open .menu-toggle span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .nav-open .menu-toggle span:nth-child(3) {
+            transform: translateY(-7px) rotate(-45deg);
+        }
+
+        /* Hero */
+        .hero {
+            height: 100vh;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--color-white);
+            overflow: hidden;
+        }
+
+        .hero-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('hero_dog_luxury_1768702981561.png');
+            background-size: cover;
+            background-position: center;
+            z-index: -1;
+            transform: scale(1.05);
+            animation: zoomOut 2s var(--transition-slow) forwards;
+        }
+
+        @keyframes zoomOut {
+            to { transform: scale(1); }
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.2);
+            z-index: -1;
+        }
+
+        .hero-content {
+            text-align: center;
+            max-width: 800px;
+        }
+
+        .hero h1 {
+            font-family: var(--font-serif);
+            font-size: 64px;
+            font-weight: 400;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+
+        .hero p {
+            font-size: 18px;
+            letter-spacing: 2px;
+            font-weight: 300;
+        }
+
+        /* Concept */
+        .concept {
+            padding-top: 160px;
+            padding-bottom: 160px;
+            text-align: center;
+        }
+
+        .concept-inner {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .section-label {
+            font-size: 28px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--color-greige);
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        .concept h2 {
+            font-family: var(--font-serif);
+            font-size: 40px;
+            font-weight: 400;
+            margin-bottom: 40px;
+            font-style: italic;
+        }
+
+        .concept p {
+            color: var(--color-charcoal);
+            opacity: 0.8;
+        }
+
+        /* Collections */
+        .collections {
+            padding-top: 80px;
+            padding-bottom: 160px;
+        }
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+        }
+
+        .product-card {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .product-image {
+            aspect-ratio: 1;
+            background-color: var(--color-light-greige);
+            margin-bottom: 20px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .product-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition-med);
+        }
+
+        .product-card:hover .product-image img {
+            transform: scale(1.05);
+        }
+
+        .product-info h3 {
+            font-family: var(--font-serif);
+            font-size: 18px;
+            margin-bottom: 5px;
+            font-weight: 400;
+        }
+
+        .product-info p {
+            font-size: 14px;
+            color: var(--color-greige);
+        }
+
+        /* Material Story (Proposal Section) */
+        .material-story {
+            background-color: var(--color-light-greige);
+            display: flex;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        .material-image {
+            flex: 1;
+            height: 600px;
+        }
+
+        .material-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .material-content {
+            flex: 1;
+            padding: 80px;
+        }
+
+        .material-content h2 {
+            font-family: var(--font-serif);
+            font-size: 36px;
+            margin-bottom: 30px;
+        }
+
+        .btn-outline {
+            display: inline-block;
+            padding: 15px 40px;
+            border: 1px solid var(--color-charcoal);
+            text-decoration: none;
+            color: var(--color-charcoal);
+            font-size: 12px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-top: 30px;
+            transition: all 0.3s;
+        }
+
+        .btn-outline:hover {
+            background-color: var(--color-charcoal);
+            color: var(--color-white);
+        }
+
+        /* Instagram */
+        .instagram {
+            padding-top: 160px;
+            padding-bottom: 160px;
+        }
+
+        .insta-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+        }
+
+        .insta-item {
+            aspect-ratio: 1/1;
+            overflow: hidden;
+        }
+
+        .insta-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition-med);
+        }
+
+        .insta-item:hover img {
+            transform: scale(1.1) rotate(1deg);
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--color-white);
+            padding: 100px 0 60px;
+            border-top: 1px solid var(--color-light-greige);
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 60px;
+            margin-bottom: 80px;
+        }
+
+        .footer-logo {
+            font-family: var(--font-serif);
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        .footer-links h4 {
+            font-size: 12px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 25px;
+        }
+
+        .footer-links ul {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 12px;
+        }
+
+        .footer-links a {
+            text-decoration: none;
+            color: var(--color-charcoal);
+            opacity: 0.6;
+            font-size: 14px;
+            transition: opacity 0.3s;
+        }
+
+        .footer-links a:hover {
+            opacity: 1;
+        }
+
+        .footer-bottom {
+            padding-top: 40px;
+            border-top: 1px solid var(--color-light-greige);
+            display: flex;
+            justify-content: space-between;
+            font-size: 12px;
+            color: var(--color-greige);
+        }
+
+        /* Mobile */
+        @media (max-width: 900px) {
+            header { padding: 20px; }
+            
+            .menu-toggle { display: flex; }
+
+            nav {
+                position: fixed;
+                top: 0;
+                right: 0;
+                width: 100%;
+                height: 100vh;
+                background: var(--color-white);
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                z-index: 1050;
+                transform: translateX(-100%);
+                transition: var(--transition-med);
+            }
+
+            .nav-open nav {
+                transform: translateX(0);
+            }
+
+            nav ul {
+                flex-direction: column;
+                align-items: center;
+                gap: 30px;
+            }
+
+            .section-label {
+                font-size: 20px;
+            }
+
+            nav a {
+                font-size: 20px;
+            }
+
+            .hero h1 { font-size: 40px; }
+            
+            .concept { padding: 80px 20px; }
+            .concept h2 { font-size: 32px; }
+            
+            /* Horizontal Scroll for Collections */
+            .collections.container { padding: 0; }
+            .collections .section-label { padding: 0 20px; }
+            
+            .product-grid { 
+                display: flex;
+                overflow-x: auto;
+                scroll-snap-type: x mandatory;
+                gap: 20px;
+                padding: 0 20px 20px;
+                -webkit-overflow-scrolling: touch;
+            }
+            .product-grid::-webkit-scrollbar {
+                display: none;
+            }
+            .product-card {
+                flex: 0 0 80%;
+                scroll-snap-align: center;
+            }
+
+            .material-story { flex-direction: column; }
+            .material-image { height: 400px; width: 100%; }
+            .material-content { padding: 40px 20px; }
+            
+            .instagram.container { padding: 40px 20px; }
+            .instagram .section-label { padding: 0 20px; }
+            .insta-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+            
+            .footer-grid { grid-template-columns: 1fr; gap: 40px; }
+        }
+    </style>
+</head>
+<body>
+
+    <header id="header">
+        <div class="menu-toggle" id="menuToggle">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <a href="#" class="logo">LUXE DOG</a>
+        <nav>
+            <ul>
+                <li><a href="#collections">Collections</a></li>
+                <li><a href="#concept">Story</a></li>
+                <li><a href="#material-story">Materials</a></li>
+                <li><a href="#instagram">Social</a></li>
+            </ul>
+        </nav>
+        <div class="header-icons">
+            <a href="#"><img src="https://api.iconify.design/ph:user-light.svg" width="20"></a>
+            <a href="#"><img src="https://api.iconify.design/ph:shopping-cart-light.svg" width="20"></a>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="hero-bg"></div>
+            <div class="hero-content">
+                <p class="reveal">ETERNAL COMFORT FOR YOUR PARTNER</p>
+                <h1 class="reveal">愛犬に、一生ものの心地よさを。</h1>
+                <div class="reveal">
+                    <a href="#collections" class="btn-outline" style="color: white; border-color: white;">Shop Now</a>
+                </div>
+            </div>
+        </section>
+
+        <section id="concept" class="concept container">
+            <div class="concept-inner">
+                <span class="section-label reveal">Brand Concept</span>
+                <h2 class="reveal">犬が主役であること、<br>その感性を形に。</h2>
+                <p class="reveal">
+                    私たちは、言葉を持たない彼らの「心地よさ」を追求しています。<br>
+                    贅沢な素材、無駄のないシルエット、そして時を経ても変わらない品質。<br>
+                    すべては、あなたの愛犬が今日一日を最高に幸せに過ごすために。
+                </p>
+            </div>
+        </section>
+
+        <section id="collections" class="collections container">
+            <span class="section-label reveal" style="text-align: center; margin-bottom: 30px;">New Arrival</span>
+            <div class="product-grid">
+                <a href="#" class="product-card reveal">
+                    <div class="product-image">
+                        <img src="product_knit_luxury_1768702996078.png" alt="Cashmere Knit">
+                    </div>
+                    <div class="product-info">
+                        <h3>Cashmere High-neck Knit</h3>
+                        <p>¥32,000</p>
+                    </div>
+                </a>
+                <a href="#" class="product-card reveal" style="transition-delay: 0.2s;">
+                    <div class="product-image">
+                        <img src="product_silk_bandana_1768703044486.png" alt="Silk Bandana">
+                    </div>
+                    <div class="product-info">
+                        <h3>Natural Silk Bandana</h3>
+                        <p>¥12,800</p>
+                    </div>
+                </a>
+                <a href="#" class="product-card reveal" style="transition-delay: 0.4s;">
+                    <div class="product-image">
+                        <img src="lifestyle_dog_home_1768703059056.png" alt="Boucle Bed">
+                    </div>
+                    <div class="product-info">
+                        <h3>The Boucle Orthopedic Bed</h3>
+                        <p>¥68,000</p>
+                    </div>
+                </a>
+            </div>
+        </section>
+
+        <section id="material-story" class="material-story">
+            <div class="material-image reveal">
+                <img src="material_organic_cotton_1768703011387.png" alt="Materials">
+            </div>
+            <div class="material-content reveal">
+                <span class="section-label">Material Story</span>
+                <h2>選び抜かれた、<br>究極の肌触り。</h2>
+                <p>
+                    カシミア100%のニット、世界基準をクリアしたオーガニックコットン。
+                    LUXE DOGでは、人間でも贅沢に感じる最高級の天然素材のみを使用しています。
+                    アトピーや肌の弱い愛犬にも安心して着せられる、究極の優しさを届けます。
+                </p>
+                <a href="#" class="btn-outline">Learn More</a>
+            </div>
+        </section>
+
+        <section id="instagram" class="instagram container">
+            <span class="section-label reveal" style="text-align: center; margin-bottom: 30px;">Follow Us @luxedog_official</span>
+            <div class="insta-grid">
+                <div class="insta-item reveal"><img src="lifestyle_dog_park_1768703025417.png" alt="Instagram"></div>
+                <div class="insta-item reveal" style="transition-delay: 0.1s;"><img src="hero_dog_luxury_1768702981561.png" alt="Instagram"></div>
+                <div class="insta-item reveal" style="transition-delay: 0.2s;"><img src="lifestyle_dog_home_1768703059056.png" alt="Instagram"></div>
+                <div class="insta-item reveal" style="transition-delay: 0.3s;"><img src="lifestyle_dog_park_1768703025417.png" alt="Instagram"></div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <span class="footer-logo">LUXE DOG</span>
+                    <p style="font-size: 14px; opacity: 0.6; max-width: 300px;">
+                        あなたの愛犬に、一生ものの心地よさと美しさを提案するドッグラグジュアリーブランド。
+                    </p>
+                </div>
+                <div class="footer-links">
+                    <h4>Shop</h4>
+                    <ul>
+                        <li><a href="#">All Items</a></li>
+                        <li><a href="#">New Arrivals</a></li>
+                        <li><a href="#">Size Guide</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h4>Support</h4>
+                    <ul>
+                        <li><a href="#">Contact</a></li>
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Returns</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h4>Legal</h4>
+                    <ul>
+                        <li><a href="#">Term of Service</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">特定商取引法に基づく表記</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 LUXE DOG. All Rights Reserved.</p>
+                <div class="social-icons" style="display: flex; gap: 20px;">
+                    <a href="#" style="opacity: 0.5;">Instagram</a>
+                    <a href="#" style="opacity: 0.5;">Pinterest</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Header scroll effect
+        window.addEventListener('scroll', () => {
+            const header = document.getElementById('header');
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // Intersection Observer for reveal animation
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+        // Mobile Menu Toggle
+        const menuToggle = document.getElementById('menuToggle');
+        const body = document.body;
+        const navLinks = document.querySelectorAll('nav a');
+
+        menuToggle.addEventListener('click', () => {
+            body.classList.toggle('nav-open');
+        });
+
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                body.classList.remove('nav-open');
+            });
+        });
+    </script>
+</body>
+</html>
